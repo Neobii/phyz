@@ -1,0 +1,30 @@
+<template name="physicianPatientComp">
+  <div class="col-md-4">
+        <h3>{{index}} : {{exercise.name}}  {{#if $eq ../profile.exerciseIndex index}}<small>CurrentExercise</small>{{/if}}</h3>
+        <div class="row">
+          <div class="col-md-6">
+          {{#if $gt index 0}}
+          <button type="button" class="btn btn-warning btn-block" data-action="physicianMoveUp" data-index="{{index}}">Move Up</button>
+          {{/if}}
+          </div>
+          <div class="col-md-6">
+          {{#if $lt nextIndex ../profile.exerciseCount}}
+          <button type="button" class="btn btn-primary btn-block" data-action="physicianMoveDown" data-index="{{index}}">Move Down</button>
+          {{/if}}
+          </div>
+        </div>
+
+    <div class="clearfix"></div>
+  <div class="row">
+  <div class="col-xs-6 col-md-12">
+    {{#with exercise}}
+    {{> vimeoThumb}}
+    {{/with}}
+    <button type="button" class="btn btn-danger btn-block" data-action="physicianDeleteExercise" data-target-id="{{_id}}" data-index="{{index}}">Remove From Syllabus</button>
+    {{#unless $eq ../profile.exerciseIndex index}}
+    <button type="button" class="btn btn-warning btn-block" data-action="physicianSetCurrent" data-target-id="{{_id}}" data-index="{{index}}">Set To Curent Exercise</button>{{/unless}}
+    <button type="button" class="btn btn-success btn-block" data-action="toggleComplete" data-target-id="{{_id}}">Set to {{#unless $eq status "complete"}}complete{{else}}incomplete{{/unless}}</button>
+    </div>
+    </div>
+  </div>
+</template>

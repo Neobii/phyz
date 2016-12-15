@@ -1,0 +1,56 @@
+<template name="Dashboard">
+		{{#if $.Session.get "patientEditPatient"}}
+			<div class="pull-right">
+				<button type="button" class="btn btn-default" data-action="cancelButton">cancel</button>
+				<button type="button" class="btn btn-primary" data-action="savePatient">Save</button>
+			</div>
+		{{else}}
+			<div class="pull-right">
+		<button type="button" class="btn btn-warning" data-action="edit-patient">edit</button>
+		</div>
+		{{/if}}
+
+	{{#with currentUser}}
+	{{#if $.Session.get "patientEditPatient"}}
+		<div>
+			<label>name:</label>
+				<input type="text" class="form-control" name="editName" placeholder="{{profile.name}}" value="{{profile.name}}" />
+			<label>phone:</label>
+				<input type="text" class="form-control" name="editPhone" placeholder="{{profile.phone}}" value="{{profile.phone}}" />
+			<label>email:</label>
+				<input type="text" class="form-control" name="editEmail" placeholder="{{emails.[0].address}}" value="{{emails.[0].address}}" />
+			<label>pass:</label>
+				<input type="text" class="form-control" name="editPassword" placeholder="{{password}}" value="{{password}}"/>
+		</div>
+		{{else}}
+		<div>
+<h1>Welcome {{currentUser.profile.name}}, <small>your physician is 
+<a href="{{pathFor 'patientPhysician'}}">{{currentUser.patientPhysician.profile.name}}</a>.</small></h1>
+	</div>
+		<div class="row">
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-earphone"></span>
+					Phone: {{profile.phone}} 
+			</div>
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-envelope"></span>
+					Email: {{emails.[0].address}}
+			</div>
+		</div>
+	{{/if}}
+	{{/with}}
+		<hr>
+		<h2>You have {{currentUser.profile.exerciseCount}} Assigned videos </h2>
+		<div class="row">
+		{{#each exercises}}
+		{{#with exercise}}
+		<a href="{{#unless $eq currentUser.profile.exerciseIndex ../index}}{{pathFor 'assignedExercise' exerciseIndex=../index}}{{else}}{{pathFor 'currentExercise'}}{{/unless}}">
+		  <div class="col-md-4">
+		    <h3>{{../index}}: {{name}}<small>{{#if $eq ../status "complete"}} Completed{{/if}}{{#if $eq currentUser.profile.exerciseIndex ../index}} Current Exercise{{/if}}
+		    {{> vimeoThumb}}</small></h3>
+		  </div>
+		</a>
+		{{/with}}
+		{{/each}}
+	</div>
+</template>

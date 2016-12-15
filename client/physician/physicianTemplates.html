@@ -1,0 +1,31 @@
+<template name="physicianTemplates">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <h1>All Syllabi</h1>
+      <tbody>
+        <tr>
+          <th><h4>Syllabus Name</h4></th>
+          <th><h4># Exercises</h4></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><input class="form-control" type="text" name="templateName" placeholder="Arm extensions"></td>
+          <td></td>
+          <td><button type="button" data-action="add-template" class="btn btn-success">+Add Syllabus</button></td>
+        </tr>
+          {{#each syllabi}}
+          {{> templateListComp}}
+          {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="templateListComp">
+  <tr>
+    <td><a href="{{pathFor 'physicianTemplate'}}" data-target-id="{{_id}}"><h4>{{name}}</h4></a></td> 
+    <td>{{exerciseCount}}</td>
+    <td><button type="button" class="btn btn-warning" data-action="edit-template" data-target-id="{{_id}}">Edit</button>
+    <button type="button" class="btn btn-danger" data-action="delete-template" data-target-id="{{_id}}">Delete</button></td>
+  </tr>
+</template>

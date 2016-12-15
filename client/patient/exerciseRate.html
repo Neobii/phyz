@@ -1,0 +1,21 @@
+<template name="exerciseRate">
+<div class="text-center">
+	{{#if showRatingBox}}
+	Rate this exercise!
+	<div class="row">
+		<button  data-action="rateBad" class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+		<button data-action="rateGood" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+	</div>
+	{{else}}
+		{{#if metrics.rating}}
+		{{#if $eq metrics.rating "good"}}
+		<button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+		{{/if}}
+		{{#if $eq metrics.rating "bad"}}
+		<button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+		{{/if}}
+		<a href="#" data-action="changeRating"><p style="text-align: center;">Change</p></a>
+		{{/if}}
+		{{/if}}
+		</div>
+</template>

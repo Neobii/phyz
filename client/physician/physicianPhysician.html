@@ -1,0 +1,47 @@
+<template name="physicianPhysician">
+{{#with physician}}
+{{#if $.Session.get "physicianEditPhysician"}}
+	<div class="clearfix">
+		<div class="pull-right">
+		<button type="button" class="btn btn-default" data-action="cancelButton">cancel</button>
+		<button type="button" class="btn btn-primary" data-action="savePhysician">Save</button>
+		</div>
+	</div>
+	<div class="">
+		<label>name:</label>
+		<input type="text" class="form-control" name="editName" placeholder="{{profile.name}}" value="{{profile.name}}"/>
+		<label>phone:</label>
+		<input type="text" class="form-control" name="editPhone" placeholder="{{profile.phone}}" value="{{profile.phone}}"/>
+		<label>email:</label>
+		<input type="text" class="form-control" name="editEmail" placeholder="{{emails.[0].address}}" value="{{emails.[0].address}}" />
+		<br>
+		{{#unless $.Session.get "physChangingPhysPassword"}}
+		<a href="#" data-action="physChangePhysPassword"><p>Change Password</p></a>
+		{{else}}
+		<label>new password:</label>
+		<input type="text" class="form-control" name="editPassword"/>
+		<button type="button" class="btn btn-primary btn-xs" data-action="saveNewPass">Save</button>
+		<button type="button" class="btn btn-default btn-xs" data-action="cancelNewPass">cancel</button>
+		{{/unless}}
+	</div>
+{{else}}
+	<div class="clearfix">
+		<div class="pull-right">
+			<button type="button" class="btn btn-warning" data-action="edit-physician" data-target-id="{{_id}}">edit</button>
+			<button type="button" class="btn btn-danger" data-action="delete-physician" data-target-id="{{_id}}">Delete</button>
+		</div>
+</div>
+<h3>{{profile.name}}</h3>
+	<div class="row">
+		<div class="col-md-4">
+		<span class="glyphicon glyphicon-earphone"></span>
+			Phone: {{profile.phone}}
+		</div>
+		<div class="col-md-4">
+		<span class="glyphicon glyphicon-envelope"></span>
+			Email: {{emails.[0].address}}
+		</div>
+	</div>
+{{/if}}
+{{/with}}
+</template>

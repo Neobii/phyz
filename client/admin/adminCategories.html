@@ -1,0 +1,54 @@
+<template name="adminCategories">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <h1>All Categories</h1>
+      <tbody>
+      <tr>
+        <th><h4>Label</h4></th>
+        <th><h4>Slug</h4></th>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+      <td>
+        <input class="text form-control" name="categoryLabel" placeholder="Arm Stretch">
+      </td>
+     <td></td>
+       <td>
+        <button type="button" class="btn btn-success" data-action="add-category">+Add New Category</button>
+      </td>
+     <td></td>
+    </tr>
+      {{#each category}}
+      {{> categoryListComp}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+</template>
+
+<template name="categoryListComp">
+{{#if $.Session.equals "adminEditingCategory" _id}}
+
+  <tr>
+  <td>
+   <input class="text form-control" name="categoryLabel" value="{{label}}">
+  </td>
+  <td></td>
+  <td>
+        <button type="button" class="btn btn-default" data-action="cancel-category">Cancel</button>
+        <button type="button" class="btn btn-primary" data-action="update-category">Update</button>
+  </td>
+  </tr>
+
+{{else}}
+    <tr>
+      <td>{{label}}</td>
+      <td>{{slug}}</td>
+      <td>
+        <button type="button" class="btn btn-warning" data-action="edit-category" data-target-id="{{_id}}">Edit</button>
+        <button type="button" class="btn btn-danger" data-action="delete-category" data-target-id="{{_id}}">Delete</button>
+      </td>
+    </tr>
+  {{/if}} 
+</template>

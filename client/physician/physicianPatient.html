@@ -1,0 +1,89 @@
+<template name="physicianPatient">
+{{#with patient}}
+{{#if $.Session.get "physicianEditPatient"}}
+			<div class="pull-right">
+				<button type="button" class="btn btn-default" data-action="cancelButton">cancel</button>
+				<button type="button" class="btn btn-primary" data-action="savePatient">Save</button>
+				<a href="{{pathFor 'physicianPatientExercises'}}"><button type="button" class="btn btn-success">Assigned Exercises</button></a>
+			</div>
+			<div class="row">
+					<div class="col-md-6">
+							<label>name:</label>
+									<input class="form-control" type="text" name="editName" placeholder="{{profile.name}}" value="{{profile.name}}"/>
+							<label>phone:</label>
+									<input class="form-control" type="text" name="editPhone" placeholder="{{profile.phone}}" value="{{profile.phone}}"/>
+							<label>email: </label>
+									<input class="form-control" type="text" name="editEmail" placeholder="{{emails.[0].address}}" value="{{emails.[0].address}}" />
+							<br>
+					{{#unless $.Session.get "physChangingPatientPassword"}}
+					<a href="#" data-action="physChangePatientPassword"><p>Change Password</p></a>
+					{{else}}
+					<label>new password:</label>
+					<input type="text" class="form-control" name="editPassword"/>
+					<button type="button" class="btn btn-primary btn-xs" data-action="saveNewPass">Save</button>
+					<button type="button" class="btn btn-default btn-xs" data-action="cancelNewPass">cancel</button>
+					{{/unless}}
+					</div>
+			</div>
+{{else}}
+			<div class="pull-right">
+				<button type="button" class="btn btn-warning" data-action="edit-patient" data-target-id="{{_id}}">edit</button>
+				<button type="button" class="btn btn-danger" data-action="delete-patient" data-target-id="{{_id}}">Delete</button>
+				<a href="{{pathFor 'physicianPatientExercises'}}"><button type="button" class="btn btn-success">Assigned Exercises</button></a>
+			</div>
+				<h1>{{profile.name}}</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<h4><span class="glyphicon glyphicon-earphone"></span> Phone: {{profile.phone}}</h4>
+				</div>
+				<div class="col-md-4">
+					<h4><span class="glyphicon glyphicon-envelope"></span> Email: {{emails.[0].address}}</h4>
+				</div>
+			</div>
+				<hr>
+		<div class="row">
+				<div>
+					<h2>Send a notification when...</h2>
+				</div>
+				<div class="col-lg-6">
+						<label>... a patient completes an exercise</label>
+			  <div class="input-group">
+				 	<span class="input-group-addon"><button type="button" class="btn btn-default {{#if profile.notifications.completedExercise}}active{{/if}}" data-action="exerciseComplete" name="exerciseComplete">{{#if profile.notifications.completedExercise}}Uns{{else}}S{{/if}}ubscribe</button></span>
+				  </div>
+				 </div>
+	  		<div class="col-lg-6">
+  					<label>... a patient completes an exercise course</label>
+			    <div class="input-group">
+			    	<span class="input-group-addon">
+			    	<button type="button" class="btn btn-default {{#if profile.notifications.completedCourse}}active{{/if}}" data-action="courseComplete" name="courseComplete">{{#if profile.notifications.completedCourse}}Uns{{else}}S{{/if}}ubscribe</button>
+			    	</span>
+			    </div>
+			  </div>
+		</div>
+
+
+		<div class="row">
+				<div>
+					<h2>Exercise reccuring daily</h2>
+				</div>
+			  <div class="input-group">
+				 	<span class="input-group-addon"><button type="button" class="btn btn-default {{#if profile.notifications.dailyExercise}}active{{/if}}" data-action="exerciseDaily" name="exerciseDaily">{{#if profile.notifications.dailyExercise}}Daily{{else}}Once{{/if}}</button></span>
+				  </div>
+		</div>
+
+
+  <hr>
+  			<h2>Activity</h2>
+		  <ul class="list-unstyled">
+			  {{#if hasCompletedSyllabus}}
+			  <li>Completed current exercise course {{hasCompletedSyllabus}}</li>
+			  {{/if}}
+			  {{#each assignedExercises}}
+			  {{#if completed}}
+			  <li>Completed {{exercise.name}} at {{completed}}</li>
+			  {{/if}}
+			  {{/each}}
+		  </ul>
+	{{/if}}
+{{/with}}
+</template>

@@ -1,0 +1,25 @@
+<template name="exerciseNavigation">
+{{#unless $lte previousIndex "-1"}}
+{{#if $eq previousIndex currentUser.profile.exerciseIndex}}
+<a href="{{pathFor 'currentExercise'}}">
+	<button class="btn btn-default pull-left">Previous</button>
+</a>
+{{else}}
+<a href="{{pathFor 'assignedExercise' exerciseIndex=previousIndex}}">
+	<button class="btn btn-default pull-left">Previous</button>
+</a>
+{{/if}}
+{{/unless}}
+{{#unless $gt nextIndex currentUser.lastExerciseIndex}}
+{{#if $eq nextIndex currentUser.profile.exerciseIndex}}
+<a href="{{pathFor 'currentExercise'}}">
+	<button class="btn btn-default pull-right">Next</button>
+</a>
+{{else}}
+<a href="{{pathFor 'assignedExercise' exerciseIndex=nextIndex}}">
+	<button class="btn btn-default pull-right">Next</button>
+</a>
+{{/if}}
+{{/unless}}
+<div class="clearfix"></div>
+</template>

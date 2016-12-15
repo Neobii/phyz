@@ -1,0 +1,23 @@
+<template name="physicianSyllabiComp">
+<h2>{{name}}</h2>
+<div class="row">
+  <div class="col-md-6">
+  {{> videoCarousel}}
+  </div>
+<div class="col-md-6">
+  <h2>Assign To</h2>
+  <select class="form-control" name="selectPatient">
+    {{#each currentUser.patients}}
+    <option value="{{_id}}">{{profile.name}}</option>
+    {{/each}}
+  </select>
+  <button data-syllabus-id="{{_id}}" type="submit" data-action="assignSyllabusToUser" class="btn btn-success">Assign</button>
+  <h2>Patients Assigned</h2>
+  <ul class="list-inline list-unstyled">
+    {{#each patientsAssigned}}
+      <li>{{patient.profile.name}}</li>
+    {{/each}}
+  </ul>
+</div>
+</div>
+</template>

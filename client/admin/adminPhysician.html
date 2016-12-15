@@ -1,0 +1,64 @@
+<template name="adminPhysician">
+{{#with physician}}
+{{#if $.Session.get "adminEditPhysician"}}
+<div class="container">
+<div class="row">
+<div class="pull-right">
+<button type="button" class="btn btn-default" data-action="cancelButton">cancel</button>
+<button type="button" class="btn btn-primary" data-action="savePhysician">Save</button>
+</div>
+</div>
+<label>name:</label>
+<input type="text" class="form-control" name="editName" placeholder="{{profile.name}}" value="{{profile.name}}" />
+<label>phone:</label>
+<input type="text" class="form-control" name="editPhone" placeholder="{{profile.phone}}" value="{{profile.phone}}" />
+<label>email:</label>
+<input type="text" class="form-control" name="editEmail" placeholder="{{emails.[0].address}}" value="{{emails.[0].address}}" />
+<label>Admin Privileges:</label>
+<input type="checkbox" class="form-control" name="editIsAdmin" checked="{{profile.isAdmin}}" />
+<br>
+{{#unless $.Session.get "adminChangingPhysPassword"}}
+<a href="#" data-action="adminChangePhysPassword"><p>Change Password</p></a>
+{{else}}
+<label>new password:</label>
+<input type="text" class="form-control" name="editPassword"/>
+<button type="button" class="btn btn-primary btn-xs" data-action="saveNewPass">Save</button>
+<button type="button" class="btn btn-default btn-xs" data-action="cancelNewPass">cancel</button>
+{{/unless}}
+</div>
+
+{{else}}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+		{{profile.name}}
+		</div>
+		<div align="right" class="col-md-6">
+		<button type="button" class="btn btn-warning" data-action="edit-physician" data-target-id="{{_id}}">edit</button>
+		<button type="button" class="btn btn-danger" data-action="delete-physician" data-target-id="{{_id}}">Delete</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			Phone:
+		</div>
+		<div class="col-md-6">
+		<span class="glyphicon glyphicon-earphone"></span>
+		{{profile.phone}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		<h4>Email:</h4>
+		</div>
+		<div class="col-md-6">
+		<span class="glyphicon glyphicon-envelope"></span>
+		{{emails.[0].address}}
+		</div>
+	</div>
+
+</div>
+{{/if}}
+{{/with}}
+</template>

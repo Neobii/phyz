@@ -1,0 +1,57 @@
+<template name="adminExercise">
+<div class="container">
+{{#with exercise}}
+{{#if $.Session.get "adminEditingExercise"}}
+<div class="row">
+  <div class="pull-right">
+    <button type="button" class="btn btn-primary" data-action="saveEditExercise">Save</button>
+    <button type="button" class="btn btn-default" data-action="cancelEditExercise">Cancel</button>
+  </div>
+</div>
+    Exercise Name:<input class="form-control" name="adminEditExerciseName" type="text" value="{{name}}">
+  <div>
+    <select name="exerciseCategory" class="form-control">
+    {{#each allCategories}}
+    <option value="{{_id}}" selected="{{$eq ../categoryId _id}}">{{label}}</option>
+    {{/each}}
+    </select>
+  </div>
+    Vimeo Id:<input class="form-control" name="adminEditVimeoId" type="text" value="{{vimeoId}}">
+
+{{else}}
+<div class="pull-left">
+	<h1>{{name}} <span class="small">{{category.label}}</span></h1>
+</div>
+<div class="pull-right">
+    <button type="button" class="btn btn-warning" data-action="adminEditExercise" data-target-id="{{_id}}">Edit</button>
+	  <button type="button" class="btn btn-danger" data-action="adminDeleteExercise" data-target-id="{{_id}}">Delete</button>
+</div>
+<div class="row">
+<div class="col-md-12">
+{{#with activeVideo}}
+{{> vimeoVid}}
+{{/with}}
+<hr>
+  <div class="text-center">
+        <p>Total Ratings</p>
+    <button class="btn btn-danger">Bad: {{totalRating.bad}}</button>
+    <button class="btn btn-success">Good: {{totalRating.good}}</button>
+  </div>
+</div>
+</div>
+    {{/if}}
+    {{#unless $eq syllabi.count 0}}
+  <p>This exercise is currently in these syllabi:</p>
+    {{else}}
+  <p>This exercise is currently not in a syllabi.</p>
+    {{/unless}}
+<ul class="list-inline list-unstyled">
+    {{#each syllabi}}
+    {{#with syllabus}}
+<li><a href="{{pathFor 'adminSyllabus'}}">{{name}}</a></li>
+{{/with}}
+{{/each}}
+</ul>
+{{/with}}
+</div>
+</template>

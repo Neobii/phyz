@@ -1,0 +1,11 @@
+<template name="selectAddExercise">
+<div class="col-md-2" style="margin-top: 140px;">
+  <select name="selectAddExercise" class="form-control">
+  {{#each allExercises}}
+  <option value="{{_id}}">{{name}}</option>
+  {{/each}}
+  </select>
+<button type="button" class="btn btn-success" data-action="addSyllabusExercise" data-index="{{nextIndex}}">+Add new Exercise</button>
+</div>
+</template>
+	

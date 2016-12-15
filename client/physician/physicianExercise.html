@@ -1,0 +1,61 @@
+<template name="physicianExercise">
+{{#with exercise}}
+<div class="pull-left">
+	<h1>{{name}} <small>{{category.label}}</small></h1>
+</div>
+<div class="row">
+<div class="col-md-12">
+{{#with activeVideo}}
+{{> vimeoVid}}
+{{/with}}
+</div>
+</div>
+<div>
+
+<hr>
+
+<h2>Patients Exercise Status</h2>
+{{#if $eq patientsAssigned.count 0}}
+<h3>You haven't assigned any one yet!</h3>
+{{else}}
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+      <td><h4>Name</h4></td>
+      <td><h4>Status</h4></td>
+      <td><h4>Rating</h4></td>
+      </tr>
+      {{#each patientsAssigned}}
+      <tr>
+      <td><a href="{{pathFor 'physicianPatient'}}">{{profile.name}}</a></td>
+      <td>{{../getPatientStatus _id}} {{../getPatientCompletedDate _id}}</td>
+      <td>{{../getPatientRating _id}}</td>
+      </tr>
+        {{/each}}
+    </tbody>
+  </table>
+        {{/if}}
+</div>
+      {{/with}}
+</template>
+
+
+<template name="xfsdfsd">
+<tr>
+  {{#unless $eq patientsNotAssigned.count 0}}
+ <td>
+  <select class="form-control" name="addPatient">
+  {{#each patientsNotAssigned}}
+    <option>Patients without Exercise</option>
+    <option value="{{_id}}">{{profile.name}}</option>
+  {{/each}}
+  </select>
+</td>
+ <td><button type="btn" data-action="new-set-current-exercise" class="btn btn-primary">Set to Current Exercise</button></td>
+ <td><button type="btn" data-action="assign-exercise" class="btn btn-success">Assign</button></td>
+   {{/unless}}
+ </tr>
+  {{#each patientsAssigned}}
+{{> physicianExerciseComp}}
+{{/each}}
+</template>

@@ -1,0 +1,31 @@
+<template name="videoCarousel">
+<div id="{{_id}}" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {{#each exercises}}
+    <li data-target="#{{_id}}" data-slide-to="{{index}}" class="{{#if $eq index 0}}active{{/if}}"></li>
+    {{/each}}
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {{#each exercises}}
+    <div class="item {{#if $eq index 0}}active{{/if}}">
+    {{#with exercise}}
+    {{> vimeoThumb}}
+    <div class="carousel-caption">
+      {{name}}
+    </div>
+    {{/with}}
+    </div>
+    {{/each}}
+    </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+</template>

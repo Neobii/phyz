@@ -1,0 +1,14 @@
+<template name="AssignedExercise">
+{{> exerciseNavigation}}
+{{#with assignedExercise}}
+{{#with exercise}}
+<h1>{{name}} {{#if $eq ../status "complete"}}<small> Completed</small>{{/if}}</h1>
+{{#with activeVideo}}
+
+{{> vimeoVid}}
+{{/with}}
+<hr>
+{{> exerciseRate}}
+{{/with}}
+{{/with}}
+</template>

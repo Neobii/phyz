@@ -1,0 +1,85 @@
+<template name="addPracticePhysician">
+
+<h1>Add a Physician</h1>
+
+<div class="container-fluid">
+	<div class="form-group">
+	<form role="form">
+		<label>Physicians's name (username)</label>
+		  <div class="form-group">
+		<input class="form-control" type="text" name="physicianName" placeholder ="Physician's name">
+			</div>
+		<label>Physician's e-mail </label>
+			<div class="form-group">
+		<input class="form-control" type="email" name="physicianEmail" placeholder ="ptdenton@gmail.com">
+			</div>
+		<label>Physician's password </label>
+			<div class="form-group">
+		<input class="form-control" type="password" name="physicianPass" placeholder ="We encrypt this">
+			</div>
+	<br>
+		<button type="button" class="btn btn-success" data-action="submitNewPhys">Submit</button>
+	</form>
+	</div>
+</div>
+</template>
+
+
+<template name="editPracticePhysician">
+
+<h1>Edit Physician</h1>
+<br>
+	<select name="selectPhysician" class="form-control">
+		{{#each physicians}}
+		<option value="{{_id}}">{{username}}</option>
+		{{/each}}
+	</select>
+<button class="btn btn-warning" data-action="editPhysician">Edit</button>
+
+{{#with physician}}
+<div class="container-fluid">
+	<div class="form-group">
+	<form role="form">
+		<label>Physicians's name</label>
+		  <div class="form-group">
+		<input class="form-control" type="text" name="editPhysicianName" value ="{{username}}">
+			</div>
+		<label>Physician's email</label>
+			<div class="form-group">
+		<input class="form-control" type="text" name="editPhysicianEmail" value ="{{emails.[0].address}}">
+			</div>
+		<label>Physician's password (pop-up info)</label>
+			<div class="form-group">
+		<input class="form-control" type="password" name="editPhysicianPass" placeholder ="Physician Name">
+			</div>
+	<br>
+		<button type="button" class="btn btn-success" data-action="submitEditPhys">Submit</button>
+		<button type="cancel" data-action="cancelButton" class="btn btn-default">cancel</button>
+	</form>
+	</div>
+	</div>
+	{{/with}}
+</template>
+
+<template name="removePracticePhysician">
+<h1>Remove Physician</h1>
+<br>
+		<select name="selectPhysician" class="form-control">
+			{{#each physicians}}
+			<option value="{{_id}}">{{username}}</option>
+			{{/each}}
+		</select>
+
+		<button type="button" class="btn btn-success" data-action="removePhysBut">Submit</button>
+
+</template>
+
+<template name="viewAllPracticePhysicians">
+  <div class="container">
+    <ul>
+  {{#each physicians}}
+      <li>{{username}}</li>
+  {{/each}}
+    </ul>
+  </div>
+</template>

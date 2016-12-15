@@ -1,0 +1,18 @@
+<template name="CurrentExercise">
+{{> exerciseNavigation}}
+{{#with currentUser.currentExercise}}
+{{#with exercise}}
+<h1>{{name}}</h1>
+{{#with activeVideo}}
+{{> vimeoVid}}
+{{/with}}
+<hr>
+<div class="text-center">
+	{{> exerciseRate}}
+</div>
+{{/with}}
+<div class="text-center">
+	<button data-action="exerciseDone" class="btn btn-success">I'm Done</button>
+</div>
+{{/with}}
+</template>

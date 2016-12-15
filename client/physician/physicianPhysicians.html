@@ -1,0 +1,35 @@
+<template name="physicianPhysicians">
+				<h1>All Physicians</h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Password</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td><input class="form-control" type="text" name="physicianName" placeholder ="Physician's name"></td>
+				<td><input class="form-control" type="email" name="physicianEmail" placeholder ="abcd@google.com"></td>
+				<td><input class="form-control" type="password" name="physicianPass" placeholder ="Make it good!"></td>
+		
+				<td><button type="button" data-action="submitNewPhys" class="btn btn-success">+Add Physician</button></td>
+			</tr>
+
+				{{#each physicians}}
+			<tr>
+				<td><a href="{{pathFor 'physicianPhysician'}}">{{profile.name}}</a></td>
+				<td>{{emails.[0].address}}</td>
+				<td></td>
+			
+				<td>
+				  <button type="button" class="btn btn-warning btn-sm" data-action="edit-physician" data-target-id="{{_id}}">edit</button>
+				  <button type="button" class="btn btn-danger btn-sm" data-action="delete-physician" data-target-id="{{_id}}">Delete</button>
+			  </td>
+			</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>

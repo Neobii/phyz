@@ -1,0 +1,23 @@
+<template name="physicianExercises">
+<div class="row">
+  <div class="col-md-3 pull-left">
+    <select name="physSelectSearchCategory" class="form-control">
+    <option value="all" selected="{{$eq _id currentCategory}}">All</option>
+    {{#each allCategories}}
+    <option value="{{_id}}" selected="{{$eq _id ../currentCategory._id}}">{{label}}</option>
+    {{/each}}
+    </select>
+  </div>
+</div>
+<br>
+<div class="row">
+{{#each exercises}}
+<a href="{{pathFor 'physicianExercise'}}" data-target-id="{{_id}}">
+  <div class="col-md-4">
+    <h2>{{name}} <small>{{category.label}}</small></h2>
+    {{> vimeoThumb}}
+  </div>
+</a>
+{{/each}}
+</div>
+</template>

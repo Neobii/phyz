@@ -1,0 +1,53 @@
+<template name="adminLayout">
+{{> adminNav}}
+<div class="container">
+{{>yield}}
+</div>
+</template>
+
+<template name="adminHome">
+<h1>Admin Panel</h1>
+{{#with currentUser}}
+{{#if $.Session.get "adminEditingSelf"}}
+
+	<div class="pull-right">
+<button type="button" class="btn btn-default" data-action="cancelButton">cancel</button>
+<button type="button" class="btn btn-primary" data-action="saveAdmin">Save</button>
+	</div>
+
+<label>name:</label>
+<input type="text" class="form-control" name="editName" placeholder="{{profile.name}}" value="{{profile.name}}"/>
+<label>phone:</label>
+<input type="text" class="form-control" name="editPhone" placeholder="{{profile.phone}}" value="{{profile.phone}}"/>
+<label>email:</label>
+<input type="text" class="form-control" name="editEmail" placeholder="{{emails.[0].address}}" value="{{emails.[0].address}}" />
+<br>
+{{#unless $.Session.get "adminResetingPassword"}}
+<a href="#" data-action="adminResetPassword"><p>Change Password</p></a>
+{{else}}
+<label>new password:</label>
+<input type="text" class="form-control" name="editPassword"/>
+<button type="button" class="btn btn-primary btn-xs" data-action="saveNewPass">Save</button>
+<button type="button" class="btn btn-default btn-xs" data-action="cancelNewPass">cancel</button>
+{{/unless}}
+	{{else}}
+
+	{{profile.name}}
+	
+		<div class="pull-right">
+			<button type="button" class="btn btn-warning" data-action="edit-admin">edit</button>
+		</div>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<span class="glyphicon glyphicon-earphone"></span>
+			Phone: {{profile.phone}}
+		</div>
+		<div class="col-md-6">
+			<span class="glyphicon glyphicon-envelope"></span>
+			Email: {{emails.[0].address}}
+		</div>
+	</div>
+	{{/if}}
+	{{/with}}
+</template>

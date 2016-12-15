@@ -1,0 +1,10 @@
+<template name="Exercise">
+{{#with exercise}}
+<h1>{{name}} <small>{{category.label}}</small></h1>
+{{#with activeVideo}}
+{{> vimeoVid}}
+{{/with}}
+<hr>
+{{> exerciseRate}}
+{{/with}}
+</template>

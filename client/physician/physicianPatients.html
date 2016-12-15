@@ -1,0 +1,45 @@
+<template name="physicianPatients">
+					<h1>My Patients</h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Password</th>
+					<th></th>
+					<th>Assigned Exercises</th>
+					<th>Last Login</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr>
+					<td><input class="form-control" type="text" name="patientName" placeholder ="Patient's name"></td>
+					<td><input class="form-control" type="email" name="patientEmail" placeholder ="abcd@google.com"></td>
+					<td><input class="form-control" type="password" name="patientPass" placeholder ="Make it good!"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><button type="button" data-action="submitNewPatient" class="btn btn-success">+Add Patient</button></td>
+					<td></td>
+				</tr>
+
+		{{#each patients}}
+				<tr>
+					<td><a href="{{pathFor 'physicianPatient'}}">{{profile.name}}</a></td>
+					<td>{{emails.[0].address}}</td>
+					<td></td>
+					<td></td>
+					<td> <a href="{{pathFor 'physicianPatientExercises'}}"><button type="button" class="btn btn-success">{{profile.exerciseCount}}</button></a></td>
+					<td></td>
+					<td>
+					  <button type="button" class="btn btn-warning btn-sm" data-action="edit-patient" data-target-id="{{_id}}">edit</button>
+					  <button type="button" class="btn btn-danger btn-sm" data-action="delete-patient" data-target-id="{{_id}}">Delete</button>
+					  </td>
+					<td>{{services.resume.loginTokens.[0].when}}</td>
+				</tr>
+		{{/each}}
+		</tbody>
+		</table>
+	</div>
+</template>

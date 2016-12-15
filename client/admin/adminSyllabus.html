@@ -1,0 +1,45 @@
+<template name="adminSyllabus">
+  {{#with syllabus}}
+  {{#if $.Session.get "adminSyllabusEditMode"}}
+  <div class="row">
+    <div class="pull-right">
+      <button type="button" class="btn btn-primary" data-action="update-syllabus">Editing...</button>
+    </div>
+    <div class="col-md-6">
+      <h4>Syllabus Name:</h4><input class="form-control" type="text" name="editSyllabusName" value="{{name}}" />
+    </div>
+  </div>
+  <div class="row">
+  	<div class="col-md-2 col-xs-12">
+      <select name="selectFirstAddExercise" class="form-control">
+      {{#each allExercises}}
+      <option value="{{_id}}">{{name}}</option>
+      {{/each}}
+      </select>
+    <button type="button" class="btn btn-success" data-action="addFirstSyllabusExercise">+Add new Exercise</button>
+    </div>
+      	{{#each exercises}}
+        	{{> editingVideoSyllabusComp}}
+        	{{> selectAddExercise}}
+        {{/each}}
+  </div>
+
+{{else}}
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{name}}</h1>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn btn-warning pull-right" data-action="edit-syllabus" data-target-id="{{_id}}">Edit</button>
+    </div>
+  </div>
+  <div class="row">
+      {{#each exercises}}
+          <a href="{{#with exercise}}{{pathFor 'adminExercise'}}{{/with}}">
+              {{> videoSyllabusComp}}
+          </a>
+      {{/each}}
+  </div>
+{{/if}}
+{{/with}}
+</template>

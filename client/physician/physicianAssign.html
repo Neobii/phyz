@@ -1,0 +1,13 @@
+<template name="physicianAssign">
+<div class="table-responsive">
+	<table class="table table-striped">
+    <tbody>
+     <tr>
+     <td><a href="{{pathFor 'physicianPatient'}}">{{profile.name}}</a></td>
+     <td><button type="btn" class="btn btn-primary" data-action="set-current-exercise" data-target-id="{{_id}}">Set to Current Exercise</button></td>
+     <td><button type="btn" class="btn btn-warning" data-action="unassign-exercise" data-target-id="{{_id}}">Unassign</button></td>
+     </tr>
+    </tbody>
+   </table>
+   </div>
+</template>

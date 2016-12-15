@@ -1,0 +1,61 @@
+<template name="physicianPatientExercises">
+{{#with patient}}
+			<div class="pull-right">
+				<a href="{{pathFor 'physicianPatient'}}"><button type="button" class="btn btn-success">Back to Patient</button></a>
+			</div>
+{{#if $.Session.get "physicianEditPatientExercises"}}
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" data-action="saveExercises">Edit mode</button>
+			</div>
+			<div class="row">
+					<div class="col-md-7">
+							<select name="syllabiSelect" class="form-control">
+									{{#each ../syllabi}}
+								<option value="{{_id}}">{{name}}</option>
+									{{/each}}
+							</select>
+					</div>
+					<div class="col-md-7">
+						<div class="pull-right">
+						<button type="button" class="btn btn-warning" data-action="makeFromTemplate">Make From Template</button>
+						</div>
+				</div>
+			</div>
+			<div class="row">
+				  <div class="col-md-2" style="margin-top: 140px;">
+					    <select name="selectFirstAddExercise" class="form-control">
+					    	{{#each allExercises}}
+					    		<option value="{{_id}}">{{name}}</option>
+					    	{{/each}}
+					    </select>
+				 						 <button type="button" class="btn btn-success" data-action="addFirstSyllabusExercise">+Add new Exercise</button>
+				  </div>
+						{{#each assignedExercises}}
+								{{> physicianPatientComp}}
+								{{> physicianAddExercise}}
+						{{/each}}
+			</div>
+		{{else}}
+		<div class="pull-right">
+			<button type="button" class="btn btn-warning" data-action="edit-exercises" data-target-id="{{_id}}">edit</button>
+		</div>
+				<h2>Assigned Exercises</h2>
+					{{#each assignedExercises}}
+					{{#with exercise}}
+		  <div class="col-md-4">
+		  <a href="{{pathFor 'physicianExercise'}}">
+		    <h3>{{../index}}: {{name}} 
+		    <small>
+		    {{#if $eq ../../profile.exerciseIndex ../index}} Current Exercise{{/if}}
+		    {{#if $eq ../status "complete"}} Completed{{/if}}
+		    </small>
+		    </h3>
+		    </a>
+		   
+		    {{> vimeoThumb}}
+		    </div>
+					{{/with}}
+					{{/each}}
+		{{/if}}
+		{{/with}}
+</template>

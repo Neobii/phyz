@@ -1,0 +1,67 @@
+<template name="videoLayout">
+
+A square with some lines next to it
+<br><br><br><br>
+
+<div class="container">
+{{> videoList}}
+</div>
+
+
+</template>
+
+
+<template name="videoList">
+
+  
+    {{#each videos}}
+      <a class="video" href="#" style="background-image: url({{preview}})">
+        <button class="play-video-button"><i class="fa fa-play"></i></button>
+      </a>
+    {{/each}}
+  
+
+  {{#with activeVideo}}
+    <!-- <div class="overlay"> -->
+      <button class="close single-icon"><i class="fa fa-times"></i></button>
+      <iframe
+        src="{{src}}"
+        width="500"
+        height="281"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen>
+      </iframe>
+      <p>{{summary}}</p>
+   <!-- </div> -->
+  {{/with}}
+
+</template>
+
+<template name="videoPlayerJunk">
+
+    {{#each videos}}
+      <a class="video" href="#" style="background-image: url({{preview}})">
+        <button class="play-video-button"><i class="fa fa-play"></i></button>
+      </a>
+    {{/each}}
+  
+
+  {{#with activeVideo}}
+    <div class="overlay">
+      <button class="close single-icon"><i class="fa fa-times"></i></button>
+      <iframe
+        src="{{src}}"
+        width="500"
+        height="281"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen>
+      </iframe>
+      <p>{{summary}}</p>
+    </div>
+  {{/with}}
+
+</template>

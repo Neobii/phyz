@@ -1,0 +1,19 @@
+<template name="physicianExerciseComp">
+	<div class="table-responsive">
+	  <table class="table table-striped">
+	    <tbody>
+	     <tr>
+		     <div class="col-md-4">
+		     	<td><a href="{{pathFor 'physicianPatient'}}">{{profile.name}}</a></td>
+		     </div>
+		     <div class="col-md-4">
+		     	<td><button type="btn" class="btn btn-primary" data-action="set-current-exercise" data-target-id="{{_id}}">Set to Current Exercise</button></td>
+		     </div>
+		     <div class="col-md-4">
+		     	<td><button type="btn" class="btn btn-warning" data-action="unassign-exercise" data-target-id="{{_id}}">Unassign</button></td>
+		     </div>
+	     </tr>
+	    </tbody>
+	   </table>
+	  </div>
+</template>
